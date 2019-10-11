@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        fieldset{
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+<h3><a th:href="@{/blog}">back to home</a></h3>
+<th:block th:if="${user}">
+<h2 th:text="'Chào Mừng đến trang ' + ${users} "></h2>
+</th:block>
+<fieldset>
+    <legend>Blog</legend>
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Writing Master</th>
+        </tr>
+        <tr th:each="blog : ${blogs}">
+            <td><a th:href="@{/blog/view/__${blog.id}__}"><u th:text="${blog.title}"></u></a></td>
+            <td th:text="${blog.user.name}"></td>
+        </tr>
+    </table>
+    <br>
+</fieldset>
+<fieldset>
+    <legend>User</legend>
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td><a th:href="@{/blog/view/__${user.id}__}"><u th:text="${user.name}"></u></a></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+    </table>
+    <br>
+</fieldset>
+<h3>
+    <!-- Print the logged in user name -->
+    <div th:if="${user}!='anonymousUser'">
+        <u th:text="${users}"></u> | <a th:href="@{/logout}">Logout</a>
+    </div>
+</h3>
+</body>
+</html>

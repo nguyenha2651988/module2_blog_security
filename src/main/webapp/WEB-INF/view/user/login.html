@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3><a th:href="@{/blog}">back to home</a></h3>
+
+<h3>
+    <div th:if="${users}!='anonymousUser'">
+        <u th:text="${users}"></u> | <a th:href="@{/logout}">Logout</a>
+    </div>
+</h3>
+<div>
+    <p th:if="${param.error}" class="error">Invalid name or password</p>
+    <div th:if="${users}=='anonymousUser'">
+        <h3>Login to continue</h3>
+    </div>
+    <form th:action="@{/login}" method="POST">
+        <input type="text" name="name" placeholder="Your name"/><br/>
+        <input type="password" name="pass" placeholder="Your password"/><br/>
+        <button type="submit">Login</button>
+        <br/>
+    </form>
+</div>
+</body>
+</html>

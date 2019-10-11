@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        fieldset {
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog Home</h1>
+<div th:if="${user}=='anonymousUser'">
+    Login as <a th:href="@{/}">Login</a> or <a th:href="@{/registration}">registration</a>
+</div>
+
+<th:block th:if="${user}!='anonymousUser'">
+    <a th:href="@{/personalPage}"><u th:text="${user}"></u></a> | <a th:href="@{/logout}">Logout</a>
+</th:block>
+
+<fieldset>
+    <legend>Blog</legend>
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Writing Master</th>
+        </tr>
+        <tr th:each="blog : ${blogs}">
+            <td><a th:href="@{/blog/view/__${blog.id}__}"><u th:text="${blog.title}"></u></a></td>
+            <td><a th:href="@{/user/view/__${blog.user.id}__}"><u th:text="${blog.user.name}"></u></a></td>
+        </tr>
+    </table>
+    <br>
+</fieldset>
+</body>
+</html>

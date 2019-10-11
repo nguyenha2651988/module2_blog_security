@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>blog</title>
+</head>
+<body>
+<h3><a th:href="@{/blog}">back to home</a></h3>
+<th:block th:if="${user}!='anonymousUser'">
+    <a th:href="@{/personalPage}"><u th:text="${user}"></u></a> | <a th:href="@{/logout}">Logout</a>
+</th:block>
+
+<form th:action="@{/edit/blog/}" th:object="${editBlog}" method="post">
+    <input type="hidden" th:field="*{id}">
+    Title : <input type="text" th:field="*{title}"><br>
+    Content : <textarea th:field="*{content}"></textarea><br>
+    <input type="hidden" th:field="*{user}">
+    <input type="submit" value="Save">
+</form>
+
+</body>
+</html>

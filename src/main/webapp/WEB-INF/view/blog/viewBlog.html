@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view</title>
+</head>
+<body>
+<h3><a th:href="@{/blog}">back to home</a></h3>
+<th:block th:if="${user}!='anonymousUser'">
+    <a th:href="@{/personalPage}"><u th:text="${user}"></u></a> | <a th:href="@{/logout}">Logout</a>
+</th:block>
+<h1>Blog Details</h1>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <td th:text="${blog.title}"></td>
+    </tr>
+    <tr>
+        <th>Content</th>
+        <td th:text="${blog.content}"></td>
+    </tr>
+    <tr>
+        <th>Writing Master</th>
+        <td th:text="${blog.user.name}"></td>
+    </tr>
+</table>
+<th:block th:if="${user}!='anonymousUser'">
+<a th:href="@{/edit/blog/__${blog.id}__}">edit</a> | <a th:href="@{/delete/blog/__${blog.id}__}">delete</a>
+</th:block>
+</body>
+</html>

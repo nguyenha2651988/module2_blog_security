@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>deleteBlog</title>
+</head>
+<body>
+<h3><a th:href="@{/blog}">back to home</a></h3>
+<th:block th:if="${user}!='anonymousUser'">
+    <a th:href="@{/personalPage}"><u th:text="${user}"></u></a> | <a th:href="@{/logout}">Logout</a>
+</th:block>
+<h3> Are you sure you want to delete this blog </h3>
+
+<form th:action="@{/delete/blog/__${blog.id}__}"  method="post">
+    Title : <u th:text="${blog.title}"></u><br>
+    Content : <u th:text="${blog.content}"></u><br>
+    author : <u th:text="${blog.user.name}"></u><br>
+    <input type="submit" value="delete">
+</form>
+</body>
+</html>
